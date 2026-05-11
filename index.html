@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Shippori+Mincho+B1:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#1A1410;--ink-mid:#3D3530;--ink-light:#7A6E66;
+  --paper:#F7F3EE;--paper-warm:#EDE8E0;--paper-deep:#E0D9CE;
+  --red:#9B2B2B;--border:#C8BFB0;
+}
+body{font-family:'Noto Serif JP',serif;background:var(--paper);color:var(--ink);line-height:1.8}
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 6%;border-bottom:1px solid var(--border);background:var(--paper);position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Shippori Mincho B1',serif;font-size:19px;font-weight:800;letter-spacing:0.15em;color:var(--ink)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:12px;letter-spacing:0.18em;color:var(--ink-light);text-decoration:none}
+.nav-links a:hover{color:var(--red)}
+.nav-cta{font-size:12px;letter-spacing:0.15em;color:#fff;background:var(--ink);padding:10px 22px;border-radius:2px;text-decoration:none}
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:88vh;background:var(--paper)}
+.hero-left{padding:80px 6% 80px 8%;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border)}
+.hero-eyebrow{font-size:11px;letter-spacing:0.35em;color:var(--red);display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--red)}
+.hero-h1{font-family:'Shippori Mincho B1',serif;font-size:clamp(44px,6vw,80px);font-weight:800;line-height:1.15;letter-spacing:0.06em;color:var(--ink);margin-bottom:8px}
+.hero-h1 em{color:var(--red);font-style:normal}
+.hero-org{font-size:12px;letter-spacing:0.2em;color:var(--ink-light);margin-bottom:36px}
+.hero-tagline{font-size:15px;color:var(--ink-mid);line-height:2.3;margin-bottom:48px;letter-spacing:0.06em}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--ink);color:#fff;font-family:'Noto Serif JP',serif;font-size:13px;letter-spacing:0.15em;padding:15px 34px;border-radius:2px;text-decoration:none;border:none;cursor:pointer}
+.btn-secondary{background:transparent;color:var(--ink);font-family:'Noto Serif JP',serif;font-size:13px;letter-spacing:0.15em;padding:15px 34px;border-radius:2px;text-decoration:none;border:1px solid var(--border)}
+.hero-right{background:var(--paper-warm);display:flex;align-items:center;justify-content:center;padding:60px 40px}
+.kanji-large{font-family:'Shippori Mincho B1',serif;font-size:clamp(110px,16vw,190px);font-weight:800;color:var(--ink);opacity:0.85;display:block;line-height:1;margin-bottom:16px;text-align:center}
+.kanji-sub{font-size:12px;letter-spacing:0.3em;color:var(--ink-light);display:block;text-align:center}
+.section{padding:80px 8%;max-width:1100px;margin:0 auto}
+.sec-label{font-size:11px;letter-spacing:0.35em;color:var(--red);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.sec-label::before{content:'';display:block;width:22px;height:1px;background:var(--red)}
+.sec-title{font-family:'Shippori Mincho B1',serif;font-size:clamp(24px,3.5vw,36px);font-weight:800;color:var(--ink);margin-bottom:14px;letter-spacing:0.05em}
+.sec-desc{font-size:14px;color:var(--ink-mid);line-height:2.3;max-width:540px;margin-bottom:52px}
+.features-bg{background:var(--paper-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.features-inner{max-width:1100px;margin:0 auto;padding:0 8%}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border)}
+.feature-item{background:var(--paper-warm);padding:36px 28px}
+.feature-num{font-family:'Shippori Mincho B1',serif;font-size:44px;font-weight:800;color:var(--paper-deep);line-height:1;margin-bottom:14px}
+.feature-title{font-family:'Shippori Mincho B1',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.feature-text{font-size:13px;color:var(--ink-light);line-height:2.1}
+.target-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:52px}
+.target-card{border:1px solid var(--border);background:#fff;padding:28px 22px;text-align:center}
+.target-emoji{font-size:34px;display:block;margin-bottom:12px}
+.target-title{font-family:'Shippori Mincho B1',serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.target-text{font-size:12px;color:var(--ink-light);line-height:2}
+.course-card{border:1px solid var(--border);background:#fff;max-width:560px}
+.course-top{padding:28px 32px 24px;border-bottom:1px solid var(--border);background:var(--paper-warm)}
+.course-badge{display:inline-block;font-size:10px;letter-spacing:0.2em;padding:4px 14px;margin-bottom:14px;background:var(--red);color:#fff;border-radius:1px}
+.course-name{font-family:'Shippori Mincho B1',serif;font-size:24px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.course-sub{font-size:12px;color:var(--ink-light);letter-spacing:0.08em}
+.course-bottom{padding:24px 32px}
+.course-note{margin-top:20px;padding:14px 18px;background:var(--paper-warm);border-left:3px solid var(--red);font-size:13px;color:var(--ink-mid);line-height:2;border-radius:0 2px 2px 0}
+.course-list{list-style:none;font-size:13px;color:var(--ink-mid);line-height:2.4}
+.course-list li{display:flex;align-items:flex-start;gap:10px}
+.course-list li::before{content:'／';color:var(--red);flex-shrink:0}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:600px}
+.tool-card{border:1px solid var(--border);background:#fff;padding:24px 26px}
+.tool-card h3{font-family:'Shippori Mincho B1',serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.tool-card ul{list-style:none;font-size:13px;color:var(--ink-mid);line-height:2.2}
+.tool-card ul li::before{content:'・';color:var(--red)}
+.tool-tag{display:inline-block;font-size:11px;background:var(--ink);color:#fff;padding:3px 12px;border-radius:1px;margin-bottom:12px;letter-spacing:0.1em}
+.tool-tag.green{background:#3A6B35}
+.access-bg{background:var(--ink)}
+.access-inner{max-width:1100px;margin:0 auto;padding:72px 8%}
+.access-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,0.1)}
+.access-card{background:var(--ink);padding:36px 30px}
+.access-title{font-family:'Shippori Mincho B1',serif;font-size:14px;font-weight:700;color:rgba(255,255,255,0.45);letter-spacing:0.2em;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.12)}
+.access-text{font-size:13px;color:rgba(255,255,255,0.75);line-height:2.4}
+.access-hl{color:#fff;font-weight:700}
+.venue-day{font-size:11px;letter-spacing:0.2em;color:var(--red);margin-bottom:4px}
+.venue-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.venue-addr{font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:16px}
+.gform-wrap{max-width:700px;margin:0 auto;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:#fff}
+.gform-placeholder{padding:60px 40px;text-align:center;background:var(--paper-warm)}
+.gform-placeholder p{font-size:13px;color:var(--ink-light);line-height:2.2;margin-top:8px}
+.gform-placeholder code{font-family:monospace;font-size:12px;background:var(--paper-deep);padding:2px 8px;border-radius:2px;color:var(--ink-mid)}
+footer{background:var(--ink);padding:28px 8%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-logo{font-family:'Shippori Mincho B1',serif;font-size:16px;font-weight:800;color:rgba(255,255,255,0.8);letter-spacing:0.15em}
+.footer-copy{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.08em}
+@media(max-width:768px){
+  .nav-links{display:none}
+  nav{padding:16px 5%}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:56px 6%;border-right:none;border-bottom:1px solid var(--border)}
+  .hero-right{padding:44px 6%;min-height:240px}
+  .kanji-large{font-size:130px}
+  .section{padding:60px 6%}
+  .tools-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;align-items:flex-start}
+  .access-card{padding:28px 20px}
+  .gform-placeholder{padding:40px 24px}
+}
+@media(max-width:480px){
+  .hero-h1{font-size:44px}
+  .kanji-large{font-size:100px}
+  .hero-btns{flex-direction:column}
+  .btn-primary,.btn-secondary{text-align:center}
+  .target-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">絖麗書道会</span>
+  <div class="nav-links">
+    <a href="#about">教室について</a>
+    <a href="#course">コース</a>
+    <a href="#tools">持ち物</a>
+    <a href="#access">会場・時間</a>
+  </div>
+  <a href="#contact" class="nav-cta">体験申し込み</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">日院書道会所属 — 仙台</div>
+    <div class="hero-h1">絖麗<em>書道会</em></div>
+    <div class="hero-org">日院書道会所属</div>
+    <p class="hero-tagline">
+      筆を持つことで、集中力が育つ。<br>
+      字がきれいになる喜びを、子どもたちへ。<br>
+      5歳から90歳まで、一緒に学べる教室です。
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">無料体験に申し込む</a>
+      <a href="#about" class="btn-secondary">教室について</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div>
+      <span class="kanji-large">書</span>
+      <span class="kanji-sub">— 一字入魂 —</span>
+    </div>
+  </div>
+</div>
+
+<div class="features-bg" id="about">
+  <div class="features-inner">
+    <div style="padding:68px 0 0">
+      <div class="sec-label">about</div>
+      <h2 class="sec-title">絖麗書道会について</h2>
+      <p class="sec-desc">小学生・中学生を中心に、5歳のお子さまから90歳の方まで幅広い世代が通う書道教室です。日院書道会の教本をもとに、一人ひとりのペースで丁寧に指導します。</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-num">01</div>
+        <div class="feature-title">子どもに寄り添う指導</div>
+        <p class="feature-text">小学生・中学生が中心。高校生・大学生も通っています。楽しみながら集中力・丁寧さが身につきます。</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">02</div>
+        <div class="feature-title">体験は手ぶらでOK</div>
+        <p class="feature-text">体験・見学は道具を用意します。入会後は消耗品のみご持参ください（自前の道具もOK）。</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">03</div>
+        <div class="feature-title">書展への出品も</div>
+        <p class="feature-text">中央の書展や各地方展にも出品できます。本格的に腕を磨きたい方にもおすすめです。</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-num">04</div>
+        <div class="feature-title">柔軟なスケジュール</div>
+        <p class="feature-text">月3回が基本。もっと練習したい時期など、ご相談に応じて柔軟に対応します。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="target" style="padding-bottom:0">
+  <div class="sec-label">こんな方へ</div>
+  <h2 class="sec-title">こんな方にぴったりです</h2>
+  <div class="target-grid">
+    <div class="target-card">
+      <span class="target-emoji">✏️</span>
+      <div class="target-title">字をきれいにしたい小学生</div>
+      <p class="target-text">学校の授業でも役立つ。書道で書く力が伸びます。</p>
+    </div>
+    <div class="target-card">
+      <span class="target-emoji">🏅</span>
+      <div class="target-title">書展・出品に挑戦したい</div>
+      <p class="target-text">中央書展や地方展への出品サポートも行っています。</p>
+    </div>
+    <div class="target-card">
+      <span class="target-emoji">👨‍👩‍👧</span>
+      <div class="target-title">習い事を探している親御さん</div>
+      <p class="target-text">集中力・姿勢・丁寧さが育つ習い事として人気です。</p>
+    </div>
+    <div class="target-card">
+      <span class="target-emoji">🖌️</span>
+      <div class="target-title">大人・シニアの趣味に</div>
+      <p class="target-text">何歳からでも大歓迎。趣味や生きがいとして続けられます。</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="course">
+  <div class="sec-label">course</div>
+  <h2 class="sec-title">コース</h2>
+  <p class="sec-desc">月3回を基本に、ご希望に合わせて柔軟に対応します。</p>
+  <div class="course-card">
+    <div class="course-top">
+      <div class="course-badge">MONTHLY COURSE</div>
+      <div class="course-name">月3回コース（基本）</div>
+      <div class="course-sub">5歳〜90歳・どなたでも対象</div>
+    </div>
+    <div class="course-bottom">
+      <ul class="course-list">
+        <li>日院書道会の教本をもとに練習</li>
+        <li>楷書・かな・実用書道など</li>
+        <li>年齢・レベルに合わせた個別指導</li>
+        <li>中央書展・地方展への出品サポート</li>
+        <li>自前の道具があればそちらを使用可</li>
+      </ul>
+      <div class="course-note">
+        ✦ 月謝は子どもと大人で異なります。大人は段級によっても変わります。詳しくはお問い合わせください。<br>
+        ✦ もっと練習したい時期など、柔軟に追加受講の相談に応じます。<br>
+        ✦ 体験レッスンは無料・道具不要です。まずはお気軽にどうぞ。
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--paper-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<div class="section" id="tools">
+  <div class="sec-label">持ち物について</div>
+  <h2 class="sec-title">持ち物・道具について</h2>
+  <p class="sec-desc">通常のレッスンでは消耗品のみご持参ください。体験は手ぶらでOKです。</p>
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-tag green">体験レッスン</div>
+      <h3>手ぶらでOK</h3>
+      <ul>
+        <li>道具はすべてご用意します</li>
+        <li>動きやすい服装でお越しください</li>
+        <li>墨で汚れる場合があります</li>
+      </ul>
+    </div>
+    <div class="tool-card">
+      <div class="tool-tag">通常レッスン（入会後）</div>
+      <h3>消耗品のみ持参</h3>
+      <ul>
+        <li>半紙</li>
+        <li>墨（液体墨でも可）</li>
+        <li>筆（大筆・小筆）</li>
+        <li>※自前の道具がある方はそちらでOK</li>
+        <li>※硯・下敷き等は教室にあります</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="access-bg">
+<div class="access-inner" id="access">
+  <div class="sec-label" style="color:rgba(255,255,255,0.4)">access & schedule</div>
+  <h2 class="sec-title" style="color:#fff;margin-bottom:44px">会場・時間</h2>
+  <div class="access-grid">
+    <div class="access-card">
+      <div class="access-title">火曜・水曜</div>
+      <div class="venue-day">TUE / WED</div>
+      <div class="venue-name">七北田コミュニティ教室</div>
+      <div class="venue-addr">仙台市泉区七北田（詳細住所はお問い合わせください）</div>
+      <p class="access-text"><span class="access-hl">午後3時半〜</span><br>※ 時間内に来て練習する形式です。都合の良い時間においでください。</p>
+    </div>
+    <div class="access-card">
+      <div class="access-title">木曜</div>
+      <div class="venue-day">THU</div>
+      <div class="venue-name">友愛町集会所</div>
+      <div class="venue-addr">仙台市（詳細住所はお問い合わせください）</div>
+      <p class="access-text"><span class="access-hl">午後5時〜</span><br>※ 時間内で自由にお越しいただけます。</p>
+    </div>
+    <div class="access-card">
+      <div class="access-title">土曜</div>
+      <div class="venue-day">SAT</div>
+      <div class="venue-name">荒巻コミュニティ教室</div>
+      <div class="venue-addr">仙台市（詳細住所はお問い合わせください）</div>
+      <p class="access-text"><span class="access-hl">午後1時半〜</span><br>※ 時間内で自由にお越しいただけます。</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="section" id="contact">
+  <div class="sec-label">contact</div>
+  <h2 class="sec-title">体験申し込み・お問い合わせ</h2>
+  <p class="sec-desc" style="margin-bottom:36px">体験レッスンは無料・手ぶらでOKです。お気軽にご連絡ください。</p>
+  <div class="gform-wrap">
+    <!-- ▼▼▼ Googleフォームのiframeをここに貼り付けてください ▼▼▼ -->
+    <!--
+      手順:
+      1. Googleフォームを開く
+      2. 右上の「送信」ボタンをクリック
+      3. 「<>」（埋め込み）タブを選択
+      4. 表示されたiframeコードをコピーして下のdivと差し替える
+    -->
+    <div class="gform-placeholder">
+      <p>
+        ここにGoogleフォームの埋め込みコードを貼り付けてください。<br><br>
+        Googleフォーム → 送信 → <code>&lt;&gt;</code>（埋め込みタブ）→ コードをコピー<br>
+        上のコメント部分と差し替えてください。
+      </p>
+    </div>
+    <!-- ▲▲▲ ここまで ▲▲▲ -->
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">絖麗書道会</span>
+  <span class="footer-copy">© 2025 絖麗書道会 ／ 日院書道会所属 — 仙台</span>
+</footer>
+</body>
+</html>
