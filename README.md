@@ -1,2 +1,2 @@
 # LandingPageFORmycliant
-お願いされたLPのコードを格納する予定
+やっぱ書道用
