@@ -7,313 +7,572 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --ink:#1A1410;--ink-mid:#3D3530;--ink-light:#7A6E66;
-  --paper:#F7F3EE;--paper-warm:#EDE8E0;--paper-deep:#E0D9CE;
-  --red:#9B2B2B;--border:#C8BFB0;
+  --ink:#1A1410;        /* メインテキスト色（ほぼ黒） */
+  --ink-mid:#3D3530;    /* 本文テキスト色 */
+  --ink-light:#7A6E66;  /* サブテキスト・注釈色 */
+  --paper:#F7F3EE;      /* 背景色（クリーム） */
+  --paper-warm:#EDE8E0; /* やや濃いクリーム */
+  --paper-deep:#E0D9CE; /* 写真プレースホルダー背景 */
+  --sage:#5C7A4E;       /* メインカラー（セージグリーン） */
+  --sage-light:#E8EDE3; /* セージの薄い背景色 */
+  --sage-border:#A8C09A;/* セージのボーダー色 */
+  --border:#C8BFB0;     /* 通常のボーダー色 */
 }
 body{font-family:'Noto Serif JP',serif;background:var(--paper);color:var(--ink);line-height:1.8}
-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 6%;border-bottom:1px solid var(--border);background:var(--paper);position:sticky;top:0;z-index:100}
+
+/* ============================================
+   固定バナー（右下に常に表示されるお問い合わせボタン）
+   ============================================ */
+.fixed-banner{
+  position:fixed;bottom:24px;right:24px;z-index:200;
+  background:var(--sage);color:#fff;
+  font-family:'Noto Serif JP',serif;font-size:13px;letter-spacing:0.12em;
+  padding:14px 24px;border-radius:2px;text-decoration:none;
+  box-shadow:0 4px 16px rgba(0,0,0,0.15);
+  display:flex;align-items:center;gap:8px;
+}
+.fixed-banner::before{content:'✉';font-size:14px}
+
+/* ============================================
+   ナビゲーション（上部固定メニュー）
+   ============================================ */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 6%;border-bottom:1px solid var(--border);
+  background:var(--paper);position:sticky;top:0;z-index:100;
+}
 .nav-logo{font-family:'Shippori Mincho B1',serif;font-size:19px;font-weight:800;letter-spacing:0.15em;color:var(--ink)}
-.nav-links{display:flex;gap:28px}
-.nav-links a{font-size:12px;letter-spacing:0.18em;color:var(--ink-light);text-decoration:none}
-.nav-links a:hover{color:var(--red)}
-.nav-cta{font-size:12px;letter-spacing:0.15em;color:#fff;background:var(--ink);padding:10px 22px;border-radius:2px;text-decoration:none}
-.hero{display:grid;grid-template-columns:1fr 1fr;min-height:88vh;background:var(--paper)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{font-size:12px;letter-spacing:0.15em;color:var(--ink-light);text-decoration:none}
+.nav-links a:hover{color:var(--sage)}
+.nav-cta{font-size:12px;letter-spacing:0.15em;color:#fff;background:var(--sage);padding:10px 22px;border-radius:2px;text-decoration:none}
+
+/* ============================================
+   ヒーロー（最初に見えるメインビジュアル）
+   ============================================ */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:92vh;background:var(--paper)}
 .hero-left{padding:80px 6% 80px 8%;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border)}
-.hero-eyebrow{font-size:11px;letter-spacing:0.35em;color:var(--red);display:flex;align-items:center;gap:12px;margin-bottom:28px}
-.hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--red)}
-.hero-h1{font-family:'Shippori Mincho B1',serif;font-size:clamp(44px,6vw,80px);font-weight:800;line-height:1.15;letter-spacing:0.06em;color:var(--ink);margin-bottom:8px}
-.hero-h1 em{color:var(--red);font-style:normal}
-.hero-org{font-size:12px;letter-spacing:0.2em;color:var(--ink-light);margin-bottom:36px}
-.hero-tagline{font-size:15px;color:var(--ink-mid);line-height:2.3;margin-bottom:48px;letter-spacing:0.06em}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn-primary{background:var(--ink);color:#fff;font-family:'Noto Serif JP',serif;font-size:13px;letter-spacing:0.15em;padding:15px 34px;border-radius:2px;text-decoration:none;border:none;cursor:pointer}
+.hero-eyebrow{font-size:11px;letter-spacing:0.35em;color:var(--sage);display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--sage)}
+.hero-h1{font-family:'Shippori Mincho B1',serif;font-size:clamp(44px,6vw,76px);font-weight:800;line-height:1.15;letter-spacing:0.06em;color:var(--ink);margin-bottom:8px}
+.hero-h1 em{color:var(--sage);font-style:normal} /* 「書道会」の部分だけ緑色 */
+.hero-org{font-size:12px;letter-spacing:0.2em;color:var(--ink-light);margin-bottom:28px}
+.hero-copy{
+  font-family:'Shippori Mincho B1',serif;font-size:clamp(13px,1.8vw,15px);
+  color:var(--ink-mid);line-height:2.5;margin-bottom:40px;letter-spacing:0.08em;
+  border-left:3px solid var(--sage);padding-left:20px; /* 左の緑ライン */
+}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+.btn-primary{background:var(--sage);color:#fff;font-family:'Noto Serif JP',serif;font-size:13px;letter-spacing:0.15em;padding:15px 34px;border-radius:2px;text-decoration:none;border:none;cursor:pointer}
 .btn-secondary{background:transparent;color:var(--ink);font-family:'Noto Serif JP',serif;font-size:13px;letter-spacing:0.15em;padding:15px 34px;border-radius:2px;text-decoration:none;border:1px solid var(--border)}
-.hero-right{background:var(--paper-warm);display:flex;align-items:center;justify-content:center;padding:60px 40px}
-.kanji-large{font-family:'Shippori Mincho B1',serif;font-size:clamp(110px,16vw,190px);font-weight:800;color:var(--ink);opacity:0.85;display:block;line-height:1;margin-bottom:16px;text-align:center}
-.kanji-sub{font-size:12px;letter-spacing:0.3em;color:var(--ink-light);display:block;text-align:center}
+
+/* ヒーロー内のジャンプボタン（各セクションへのリンク） */
+.jump-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.jump-btn{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:2px;padding:12px 14px;text-decoration:none;color:var(--ink-mid);font-size:12px;letter-spacing:0.1em}
+.jump-btn:hover{border-color:var(--sage);color:var(--sage)}
+.jump-arrow{font-size:10px;color:var(--sage);margin-left:auto}
+
+/* ヒーロー右側（写真エリア） */
+.hero-right{background:var(--sage-light);display:flex;align-items:center;justify-content:center;padding:60px 40px}
+.hero-photo{width:100%;max-width:380px;aspect-ratio:4/3;background:var(--paper-deep);border-radius:4px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);overflow:hidden}
+.photo-placeholder{font-size:12px;color:var(--ink-light);letter-spacing:0.1em;text-align:center;line-height:2}
+
+/* ============================================
+   共通セクション設定
+   ============================================ */
 .section{padding:80px 8%;max-width:1100px;margin:0 auto}
-.sec-label{font-size:11px;letter-spacing:0.35em;color:var(--red);display:flex;align-items:center;gap:12px;margin-bottom:18px}
-.sec-label::before{content:'';display:block;width:22px;height:1px;background:var(--red)}
-.sec-title{font-family:'Shippori Mincho B1',serif;font-size:clamp(24px,3.5vw,36px);font-weight:800;color:var(--ink);margin-bottom:14px;letter-spacing:0.05em}
-.sec-desc{font-size:14px;color:var(--ink-mid);line-height:2.3;max-width:540px;margin-bottom:52px}
-.features-bg{background:var(--paper-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.features-inner{max-width:1100px;margin:0 auto;padding:0 8%}
-.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border)}
-.feature-item{background:var(--paper-warm);padding:36px 28px}
-.feature-num{font-family:'Shippori Mincho B1',serif;font-size:44px;font-weight:800;color:var(--paper-deep);line-height:1;margin-bottom:14px}
-.feature-title{font-family:'Shippori Mincho B1',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:10px}
-.feature-text{font-size:13px;color:var(--ink-light);line-height:2.1}
-.target-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:52px}
-.target-card{border:1px solid var(--border);background:#fff;padding:28px 22px;text-align:center}
-.target-emoji{font-size:34px;display:block;margin-bottom:12px}
-.target-title{font-family:'Shippori Mincho B1',serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px}
-.target-text{font-size:12px;color:var(--ink-light);line-height:2}
-.course-card{border:1px solid var(--border);background:#fff;max-width:560px}
-.course-top{padding:28px 32px 24px;border-bottom:1px solid var(--border);background:var(--paper-warm)}
-.course-badge{display:inline-block;font-size:10px;letter-spacing:0.2em;padding:4px 14px;margin-bottom:14px;background:var(--red);color:#fff;border-radius:1px}
-.course-name{font-family:'Shippori Mincho B1',serif;font-size:24px;font-weight:800;color:var(--ink);margin-bottom:4px}
-.course-sub{font-size:12px;color:var(--ink-light);letter-spacing:0.08em}
-.course-bottom{padding:24px 32px}
-.course-note{margin-top:20px;padding:14px 18px;background:var(--paper-warm);border-left:3px solid var(--red);font-size:13px;color:var(--ink-mid);line-height:2;border-radius:0 2px 2px 0}
-.course-list{list-style:none;font-size:13px;color:var(--ink-mid);line-height:2.4}
-.course-list li{display:flex;align-items:flex-start;gap:10px}
-.course-list li::before{content:'／';color:var(--red);flex-shrink:0}
-.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:600px}
-.tool-card{border:1px solid var(--border);background:#fff;padding:24px 26px}
-.tool-card h3{font-family:'Shippori Mincho B1',serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
-.tool-card ul{list-style:none;font-size:13px;color:var(--ink-mid);line-height:2.2}
-.tool-card ul li::before{content:'・';color:var(--red)}
-.tool-tag{display:inline-block;font-size:11px;background:var(--ink);color:#fff;padding:3px 12px;border-radius:1px;margin-bottom:12px;letter-spacing:0.1em}
-.tool-tag.green{background:#3A6B35}
-.access-bg{background:var(--ink)}
-.access-inner{max-width:1100px;margin:0 auto;padding:72px 8%}
-.access-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(255,255,255,0.1)}
-.access-card{background:var(--ink);padding:36px 30px}
-.access-title{font-family:'Shippori Mincho B1',serif;font-size:14px;font-weight:700;color:rgba(255,255,255,0.45);letter-spacing:0.2em;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.12)}
-.access-text{font-size:13px;color:rgba(255,255,255,0.75);line-height:2.4}
-.access-hl{color:#fff;font-weight:700}
-.venue-day{font-size:11px;letter-spacing:0.2em;color:var(--red);margin-bottom:4px}
-.venue-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
-.venue-addr{font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:16px}
+.sec-label{font-size:11px;letter-spacing:0.35em;color:var(--sage);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.sec-label::before{content:'';display:block;width:22px;height:1px;background:var(--sage)}
+.sec-title{font-family:'Shippori Mincho B1',serif;font-size:clamp(24px,3.5vw,36px);font-weight:800;color:var(--ink);margin-bottom:20px;letter-spacing:0.05em}
+.sec-desc{font-size:14px;color:var(--ink-mid);line-height:2.4;max-width:580px;margin-bottom:48px}
+/* 背景色が変わるセクション（交互に使う） */
+.alt-bg{background:var(--sage-light);border-top:1px solid var(--sage-border);border-bottom:1px solid var(--sage-border)}
+
+/* ============================================
+   教室について（aboutセクション）
+   ============================================ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.about-text p{font-size:14px;color:var(--ink-mid);line-height:2.6;margin-bottom:20px}
+.about-text p:last-child{margin-bottom:0}
+.about-photo{aspect-ratio:3/4;background:var(--paper-deep);border-radius:4px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);overflow:hidden}
+
+/* ============================================
+   コース（教育部・一般部）
+   ============================================ */
+.course-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.course-card{background:#fff;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.course-head{padding:20px 28px;border-bottom:1px solid var(--border);background:var(--paper-warm)}
+.course-head.general{background:var(--sage-light)} /* 一般部はセージ背景 */
+.course-badge{display:inline-block;font-size:10px;letter-spacing:0.2em;padding:3px 12px;margin-bottom:10px;border-radius:1px;background:var(--ink);color:#fff}
+.course-head.general .course-badge{background:var(--sage)}
+.course-name{font-family:'Shippori Mincho B1',serif;font-size:22px;font-weight:800;color:var(--ink)}
+.course-target{font-size:12px;color:var(--ink-light);margin-top:4px;letter-spacing:0.05em}
+.course-body{padding:24px 28px}
+.course-list{list-style:none;font-size:13px;color:var(--ink-mid);line-height:2.4;margin-bottom:16px}
+.course-list li{display:flex;align-items:flex-start;gap:8px}
+.course-list li::before{content:'—';color:var(--sage);flex-shrink:0}
+.course-note{font-size:12px;color:var(--ink-light);line-height:2;padding-top:14px;border-top:1px solid var(--border)}
+
+/* ============================================
+   先生プロフィール
+   ============================================ */
+.teacher-wrap{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start;background:#fff;border:1px solid var(--border);border-radius:4px;padding:36px}
+.teacher-photo{aspect-ratio:3/4;background:var(--paper-deep);border-radius:4px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);overflow:hidden}
+.teacher-name{font-family:'Shippori Mincho B1',serif;font-size:24px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.teacher-title{font-size:12px;color:var(--sage);letter-spacing:0.12em;margin-bottom:20px}
+.teacher-bio{font-size:14px;color:var(--ink-mid);line-height:2.5}
+
+/* ============================================
+   会場・時間
+   ============================================ */
+.access-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.access-card{background:#fff;border:1px solid var(--border);border-radius:4px;padding:24px 22px}
+.access-day{font-size:10px;letter-spacing:0.25em;color:var(--sage);margin-bottom:4px;font-weight:700}
+.access-kanji{font-size:13px;color:var(--ink-light);margin-bottom:8px}
+.access-venue{font-family:'Shippori Mincho B1',serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.access-addr{font-size:12px;color:var(--ink-light);margin-bottom:14px}
+.access-time{font-size:15px;font-weight:700;color:var(--sage)}
+.access-note{margin-top:24px;background:#fff;border:1px solid var(--border);border-radius:4px;padding:20px 24px;font-size:13px;color:var(--ink-mid);line-height:2.3}
+.access-note strong{color:var(--sage)}
+
+/* ============================================
+   よくある質問
+   ============================================ */
+.faq-list{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:4px;overflow:hidden;max-width:720px}
+.faq-item{border-bottom:1px solid var(--border);background:#fff}
+.faq-item:last-child{border-bottom:none}
+.faq-q{padding:20px 24px;font-size:14px;font-weight:700;color:var(--ink);display:flex;gap:16px;align-items:flex-start}
+.faq-q-label{color:var(--sage);font-family:'Shippori Mincho B1',serif;font-size:18px;font-weight:800;flex-shrink:0;line-height:1.4}
+.faq-a{padding:0 24px 20px 58px;font-size:13px;color:var(--ink-mid);line-height:2.3}
+
+/* ============================================
+   作品展
+   ============================================ */
+.works-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.work-item{aspect-ratio:1;background:var(--paper-warm);border-radius:4px;border:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.work-placeholder{font-family:'Shippori Mincho B1',serif;font-size:36px;font-weight:800;color:var(--paper-deep)}
+
+/* ============================================
+   お問い合わせフォーム
+   ============================================ */
 .gform-wrap{max-width:700px;margin:0 auto;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:#fff}
 .gform-placeholder{padding:60px 40px;text-align:center;background:var(--paper-warm)}
 .gform-placeholder p{font-size:13px;color:var(--ink-light);line-height:2.2;margin-top:8px}
 .gform-placeholder code{font-family:monospace;font-size:12px;background:var(--paper-deep);padding:2px 8px;border-radius:2px;color:var(--ink-mid)}
+
+/* ============================================
+   フッター
+   ============================================ */
 footer{background:var(--ink);padding:28px 8%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .footer-logo{font-family:'Shippori Mincho B1',serif;font-size:16px;font-weight:800;color:rgba(255,255,255,0.8);letter-spacing:0.15em}
 .footer-copy{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.08em}
+
+/* ============================================
+   スマホ対応（768px以下）
+   ============================================ */
 @media(max-width:768px){
-  .nav-links{display:none}
+  .nav-links{display:none} /* スマホはナビリンクを非表示 */
   nav{padding:16px 5%}
-  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero{grid-template-columns:1fr;min-height:auto} /* 縦並びに */
   .hero-left{padding:56px 6%;border-right:none;border-bottom:1px solid var(--border)}
-  .hero-right{padding:44px 6%;min-height:240px}
-  .kanji-large{font-size:130px}
+  .hero-right{padding:44px 6%}
+  .about-grid{grid-template-columns:1fr;gap:32px}
+  .about-photo{aspect-ratio:16/9}
+  .course-grid{grid-template-columns:1fr}
+  .teacher-wrap{grid-template-columns:1fr;gap:24px}
+  .teacher-photo{aspect-ratio:16/9}
   .section{padding:60px 6%}
-  .tools-grid{grid-template-columns:1fr}
   footer{flex-direction:column;align-items:flex-start}
-  .access-card{padding:28px 20px}
-  .gform-placeholder{padding:40px 24px}
+  .fixed-banner{bottom:16px;right:16px;font-size:12px;padding:12px 18px}
 }
 @media(max-width:480px){
   .hero-h1{font-size:44px}
-  .kanji-large{font-size:100px}
   .hero-btns{flex-direction:column}
   .btn-primary,.btn-secondary{text-align:center}
-  .target-grid{grid-template-columns:1fr 1fr}
+  .works-grid{grid-template-columns:repeat(3,1fr)}
+  .faq-a{padding-left:40px}
 }
 </style>
 </head>
 <body>
 
+<!-- ▼▼▼ 右下固定バナー ▼▼▼ -->
+<a href="#contact" class="fixed-banner">体験申し込み・お問い合わせはこちら</a>
+
+<!-- ▼▼▼ ナビゲーション ▼▼▼ -->
 <nav>
   <span class="nav-logo">絖麗書道会</span>
   <div class="nav-links">
     <a href="#about">教室について</a>
     <a href="#course">コース</a>
-    <a href="#tools">持ち物</a>
+    <a href="#teacher">先生</a>
     <a href="#access">会場・時間</a>
+    <a href="#faq">よくある質問</a>
   </div>
   <a href="#contact" class="nav-cta">体験申し込み</a>
 </nav>
 
+<!-- ▼▼▼ ヒーロー ▼▼▼ -->
 <div class="hero">
   <div class="hero-left">
+
+    <!-- 上部のラベル -->
     <div class="hero-eyebrow">日院書道会所属 — 仙台</div>
+
+    <!-- 教室名 -->
     <div class="hero-h1">絖麗<em>書道会</em></div>
     <div class="hero-org">日院書道会所属</div>
-    <p class="hero-tagline">
-      筆を持つことで、集中力が育つ。<br>
-      字がきれいになる喜びを、子どもたちへ。<br>
-      5歳から90歳まで、一緒に学べる教室です。
-    </p>
+
+    <!-- キャッチコピー（パンフレットの文章） -->
+    <div class="hero-copy">
+      書における古典の素晴らしさを大切に、<br>
+      新しい流行に溺れることなく<br>
+      書の妙趣を楽しむ書道会です。
+    </div>
+
+    <!-- 体験申し込みボタン -->
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">無料体験に申し込む</a>
-      <a href="#about" class="btn-secondary">教室について</a>
     </div>
+
+    <!-- 各セクションへのジャンプボタン -->
+    <div class="jump-grid">
+      <a href="#about" class="jump-btn">教室について <span class="jump-arrow">↓</span></a>
+      <a href="#course" class="jump-btn">コース <span class="jump-arrow">↓</span></a>
+      <a href="#teacher" class="jump-btn">先生のプロフィール <span class="jump-arrow">↓</span></a>
+      <a href="#access" class="jump-btn">会場・時間 <span class="jump-arrow">↓</span></a>
+    </div>
+
   </div>
   <div class="hero-right">
-    <div>
-      <span class="kanji-large">書</span>
-      <span class="kanji-sub">— 一字入魂 —</span>
+    <!-- ▼ 教室や作品の写真（横長）に差し替えてください ▼ -->
+    <div class="hero-photo">
+      <div class="photo-placeholder">教室・作品の写真<br>（横長）</div>
     </div>
+    <!-- ▲ 写真ここまで ▲ -->
   </div>
 </div>
 
-<div class="features-bg" id="about">
-  <div class="features-inner">
-    <div style="padding:68px 0 0">
-      <div class="sec-label">about</div>
-      <h2 class="sec-title">絖麗書道会について</h2>
-      <p class="sec-desc">小学生・中学生を中心に、5歳のお子さまから90歳の方まで幅広い世代が通う書道教室です。日院書道会の教本をもとに、一人ひとりのペースで丁寧に指導します。</p>
+
+<!-- ========================================
+     教室について
+     ======================================== -->
+<div class="section" id="about">
+  <div class="sec-label">about</div>
+  <h2 class="sec-title">絖麗書道会について</h2>
+  <div class="about-grid">
+
+    <div class="about-text">
+      <!-- ▼ 本文を自由に書き換えてください ▼ -->
+      <p>絖麗書道会は、仙台市内3会場で活動する書道会です。日院書道会に所属し、古典をていねいに学ぶことを大切にしています。</p>
+      <p>子どもから大人・シニアまで、幅広い世代が同じ教室で筆を持っています。基本は月3回。3会場どこでも振替できるので、都合に合わせて無理なく続けられます。</p>
+      <p>書き初めや夏休みの課題にも力を入れており、各種コンクールや表彰を目指した指導も行っています。</p>
+      <!-- ▲ 本文ここまで ▲ -->
     </div>
-    <div class="features-grid">
-      <div class="feature-item">
-        <div class="feature-num">01</div>
-        <div class="feature-title">子どもに寄り添う指導</div>
-        <p class="feature-text">小学生・中学生が中心。高校生・大学生も通っています。楽しみながら集中力・丁寧さが身につきます。</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-num">02</div>
-        <div class="feature-title">体験は手ぶらでOK</div>
-        <p class="feature-text">体験・見学は道具を用意します。入会後は消耗品のみご持参ください（自前の道具もOK）。</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-num">03</div>
-        <div class="feature-title">書展への出品も</div>
-        <p class="feature-text">中央の書展や各地方展にも出品できます。本格的に腕を磨きたい方にもおすすめです。</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-num">04</div>
-        <div class="feature-title">柔軟なスケジュール</div>
-        <p class="feature-text">月3回が基本。もっと練習したい時期など、ご相談に応じて柔軟に対応します。</p>
+
+    <!-- ▼ 教室の写真（縦長）に差し替えてください ▼ -->
+    <div class="about-photo">
+      <div class="photo-placeholder" style="font-size:12px;color:#9B8C78;text-align:center;padding:24px">
+        教室の写真<br>（縦長）
       </div>
     </div>
+    <!-- ▲ 写真ここまで ▲ -->
+
   </div>
 </div>
 
-<div class="section" id="target" style="padding-bottom:0">
-  <div class="sec-label">こんな方へ</div>
-  <h2 class="sec-title">こんな方にぴったりです</h2>
-  <div class="target-grid">
-    <div class="target-card">
-      <span class="target-emoji">✏️</span>
-      <div class="target-title">字をきれいにしたい小学生</div>
-      <p class="target-text">学校の授業でも役立つ。書道で書く力が伸びます。</p>
-    </div>
-    <div class="target-card">
-      <span class="target-emoji">🏅</span>
-      <div class="target-title">書展・出品に挑戦したい</div>
-      <p class="target-text">中央書展や地方展への出品サポートも行っています。</p>
-    </div>
-    <div class="target-card">
-      <span class="target-emoji">👨‍👩‍👧</span>
-      <div class="target-title">習い事を探している親御さん</div>
-      <p class="target-text">集中力・姿勢・丁寧さが育つ習い事として人気です。</p>
-    </div>
-    <div class="target-card">
-      <span class="target-emoji">🖌️</span>
-      <div class="target-title">大人・シニアの趣味に</div>
-      <p class="target-text">何歳からでも大歓迎。趣味や生きがいとして続けられます。</p>
-    </div>
-  </div>
-</div>
 
-<div class="section" id="course">
+<!-- ========================================
+     コース（教育部・一般部）
+     ======================================== -->
+<div class="alt-bg">
+<div class="section" id="course" style="padding-top:72px;padding-bottom:72px">
   <div class="sec-label">course</div>
   <h2 class="sec-title">コース</h2>
-  <p class="sec-desc">月3回を基本に、ご希望に合わせて柔軟に対応します。</p>
-  <div class="course-card">
-    <div class="course-top">
-      <div class="course-badge">MONTHLY COURSE</div>
-      <div class="course-name">月3回コース（基本）</div>
-      <div class="course-sub">5歳〜90歳・どなたでも対象</div>
-    </div>
-    <div class="course-bottom">
-      <ul class="course-list">
-        <li>日院書道会の教本をもとに練習</li>
-        <li>楷書・かな・実用書道など</li>
-        <li>年齢・レベルに合わせた個別指導</li>
-        <li>中央書展・地方展への出品サポート</li>
-        <li>自前の道具があればそちらを使用可</li>
-      </ul>
-      <div class="course-note">
-        ✦ 月謝は子どもと大人で異なります。大人は段級によっても変わります。詳しくはお問い合わせください。<br>
-        ✦ もっと練習したい時期など、柔軟に追加受講の相談に応じます。<br>
-        ✦ 体験レッスンは無料・道具不要です。まずはお気軽にどうぞ。
+  <p class="sec-desc">日院書道会の競書を基本に、毎月課題に取り組みながら段級を積み上げていきます。</p>
+  <div class="course-grid">
+
+    <!-- 教育部カード -->
+    <div class="course-card">
+      <div class="course-head">
+        <div class="course-badge">EDUCATION</div>
+        <!-- ▼ コース名・対象を変更する場合はここを書き換え ▼ -->
+        <div class="course-name">教育部</div>
+        <div class="course-target">小学生・中学生対象</div>
+        <!-- ▲ ここまで ▲ -->
+      </div>
+      <div class="course-body">
+        <ul class="course-list">
+          <!-- ▼ 内容を変更する場合は<li>を書き換え ▼ -->
+          <li>毎月変わる競書課題に取り組む</li>
+          <li>毛筆・ペン字</li>
+          <li>書き初め・夏休み課題など学校行事のサポート</li>
+          <li>各種コンクール・表彰を目指した指導</li>
+          <!-- ▲ ここまで ▲ -->
+        </ul>
+        <!-- ▼ 補足メモを変更する場合はここ ▼ -->
+        <div class="course-note">
+          段級を積み上げながら、学校の授業や書き初め大会にも自然と役立ちます。
+        </div>
+        <!-- ▲ ここまで ▲ -->
       </div>
     </div>
+
+    <!-- 一般部カード -->
+    <div class="course-card">
+      <div class="course-head general">
+        <div class="course-badge">GENERAL</div>
+        <!-- ▼ コース名・対象を変更する場合はここを書き換え ▼ -->
+        <div class="course-name">一般部</div>
+        <div class="course-target">高校生以上・大人・シニア対象</div>
+        <!-- ▲ ここまで ▲ -->
+      </div>
+      <div class="course-body">
+        <ul class="course-list">
+          <!-- ▼ 内容を変更する場合は<li>を書き換え ▼ -->
+          <li>毎月変わる競書課題（種類も豊富）</li>
+          <li>毛筆・ペン字・ボールペン字・細字・かな・実用書など</li>
+          <li>段級の積み上げ、師範を目指すことも可能</li>
+          <li>作品展・外部展覧会への出品（希望者のみ）</li>
+          <li>自分が書きたい字・作品の個人練習</li>
+          <!-- ▲ ここまで ▲ -->
+        </ul>
+        <!-- ▼ 補足メモを変更する場合はここ ▼ -->
+        <div class="course-note">
+          競書・個人練習・展覧会出品、取り組み方は自由に選べます。展覧会への出品は強制ではありません。
+        </div>
+        <!-- ▲ ここまで ▲ -->
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+<!-- ========================================
+     先生プロフィール
+     ======================================== -->
+<div class="section" id="teacher">
+  <div class="sec-label">teacher</div>
+  <h2 class="sec-title">先生プロフィール</h2>
+  <div class="teacher-wrap">
+
+    <!-- ▼ 先生の写真に差し替えてください ▼ -->
+    <div class="teacher-photo">
+      <div class="photo-placeholder" style="font-size:12px;color:#9B8C78;text-align:center;padding:16px">
+        先生の写真
+      </div>
+    </div>
+    <!-- ▲ 写真ここまで ▲ -->
+
+    <div>
+      <!-- ▼ 先生のお名前を入れてください ▼ -->
+      <div class="teacher-name">（先生のお名前）</div>
+      <!-- ▲ ここまで ▲ -->
+
+      <!-- ▼ 肩書きを変更する場合はここ ▼ -->
+      <div class="teacher-title">絖麗書道会 主宰 ／ 日院書道会所属</div>
+      <!-- ▲ ここまで ▲ -->
+
+      <!-- ▼ 経歴・プロフィール文を入れてください（確認後に追記） ▼ -->
+      <p class="teacher-bio" style="color:var(--ink-light);font-size:13px;line-height:2.2">
+        ※ 先生の経歴・プロフィールをここに入れます。確認後に追記してください。
+      </p>
+      <!-- ▲ ここまで ▲ -->
+    </div>
+
   </div>
 </div>
 
-<div style="background:var(--paper-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-<div class="section" id="tools">
-  <div class="sec-label">持ち物について</div>
-  <h2 class="sec-title">持ち物・道具について</h2>
-  <p class="sec-desc">通常のレッスンでは消耗品のみご持参ください。体験は手ぶらでOKです。</p>
-  <div class="tools-grid">
-    <div class="tool-card">
-      <div class="tool-tag green">体験レッスン</div>
-      <h3>手ぶらでOK</h3>
-      <ul>
-        <li>道具はすべてご用意します</li>
-        <li>動きやすい服装でお越しください</li>
-        <li>墨で汚れる場合があります</li>
-      </ul>
-    </div>
-    <div class="tool-card">
-      <div class="tool-tag">通常レッスン（入会後）</div>
-      <h3>消耗品のみ持参</h3>
-      <ul>
-        <li>半紙</li>
-        <li>墨（液体墨でも可）</li>
-        <li>筆（大筆・小筆）</li>
-        <li>※自前の道具がある方はそちらでOK</li>
-        <li>※硯・下敷き等は教室にあります</li>
-      </ul>
-    </div>
-  </div>
-</div>
-</div>
 
-<div class="access-bg">
-<div class="access-inner" id="access">
-  <div class="sec-label" style="color:rgba(255,255,255,0.4)">access & schedule</div>
-  <h2 class="sec-title" style="color:#fff;margin-bottom:44px">会場・時間</h2>
+<!-- ========================================
+     会場・時間
+     ======================================== -->
+<div class="alt-bg">
+<div class="section" id="access" style="padding-top:72px;padding-bottom:72px">
+  <div class="sec-label">access & schedule</div>
+  <h2 class="sec-title">会場・時間</h2>
+
+  <!-- ▼ リード文を変更する場合はここ ▼ -->
+  <p style="font-size:14px;color:var(--ink-mid);line-height:2.3;margin-bottom:32px;max-width:560px">
+    基本は月3回。3会場どこでも振替できます。その週の都合に合わせてお越しください。
+  </p>
+  <!-- ▲ ここまで ▲ -->
+
   <div class="access-grid">
+
+    <!-- 火曜・水曜 -->
     <div class="access-card">
-      <div class="access-title">火曜・水曜</div>
-      <div class="venue-day">TUE / WED</div>
-      <div class="venue-name">七北田コミュニティ教室</div>
-      <div class="venue-addr">仙台市泉区七北田（詳細住所はお問い合わせください）</div>
-      <p class="access-text"><span class="access-hl">午後3時半〜</span><br>※ 時間内に来て練習する形式です。都合の良い時間においでください。</p>
+      <div class="access-day">TUE / WED</div>
+      <div class="access-kanji">火曜・水曜</div>
+      <!-- ▼ 会場名・住所・時間を変更する場合はここ ▼ -->
+      <div class="access-venue">七北田コミュニティ教室</div>
+      <div class="access-addr">仙台市泉区七北田</div>
+      <div class="access-time">午後3時半〜</div>
+      <!-- ▲ ここまで ▲ -->
     </div>
+
+    <!-- 木曜 -->
     <div class="access-card">
-      <div class="access-title">木曜</div>
-      <div class="venue-day">THU</div>
-      <div class="venue-name">友愛町集会所</div>
-      <div class="venue-addr">仙台市（詳細住所はお問い合わせください）</div>
-      <p class="access-text"><span class="access-hl">午後5時〜</span><br>※ 時間内で自由にお越しいただけます。</p>
+      <div class="access-day">THU</div>
+      <div class="access-kanji">木曜</div>
+      <!-- ▼ 会場名・住所・時間を変更する場合はここ ▼ -->
+      <div class="access-venue">友愛町集会所</div>
+      <div class="access-addr">仙台市</div>
+      <div class="access-time">午後5時〜</div>
+      <!-- ▲ ここまで ▲ -->
     </div>
+
+    <!-- 土曜 -->
     <div class="access-card">
-      <div class="access-title">土曜</div>
-      <div class="venue-day">SAT</div>
-      <div class="venue-name">荒巻コミュニティ教室</div>
-      <div class="venue-addr">仙台市（詳細住所はお問い合わせください）</div>
-      <p class="access-text"><span class="access-hl">午後1時半〜</span><br>※ 時間内で自由にお越しいただけます。</p>
+      <div class="access-day">SAT</div>
+      <div class="access-kanji">土曜</div>
+      <!-- ▼ 会場名・住所・時間を変更する場合はここ ▼ -->
+      <div class="access-venue">荒巻コミュニティ教室</div>
+      <div class="access-addr">仙台市</div>
+      <div class="access-time">午後1時半〜</div>
+      <!-- ▲ ここまで ▲ -->
     </div>
+
   </div>
+
+  <!-- 振替についての補足 -->
+  <!-- ▼ 振替の説明を変更する場合はここ ▼ -->
+  <div class="access-note">
+    <strong>振替について</strong><br>
+    3会場はすべて振替対象です。「今週は木曜が都合悪い」という場合も、土曜や火・水曜に振り替えてご参加いただけます。
+  </div>
+  <!-- ▲ ここまで ▲ -->
+
 </div>
 </div>
 
-<div class="section" id="contact">
+
+<!-- ========================================
+     よくある質問
+     ======================================== -->
+<div class="section" id="faq">
+  <div class="sec-label">faq</div>
+  <h2 class="sec-title">よくある質問</h2>
+  <p class="sec-desc" style="margin-bottom:36px">体験前に気になること、まとめました。</p>
+  <div class="faq-list">
+
+    <!-- Q&Aを追加・変更する場合は下のブロックをコピーして使ってください -->
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-label">Q</span>体験は何を持っていけばいいですか？</div>
+      <div class="faq-a">手ぶらでお越しください。体験時の道具はすべてこちらで用意します。墨で汚れる場合があるので、汚れてもよい服装でお越しください。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-label">Q</span>入会後の道具はどうすればいいですか？</div>
+      <div class="faq-a">消耗品（半紙・墨・筆）のみご持参ください。硯・下敷き・文鎮などは教室にあります。自前の道具をお持ちの方はそちらをご使用いただけます。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-label">Q</span>月に何回通いますか？</div>
+      <div class="faq-a">基本は月3回です。もっと練習したい方や検定・展覧会に向けて集中したい時期は、ご相談に応じて対応します。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-label">Q</span>休んだ場合、振替はできますか？</div>
+      <div class="faq-a">できます。仙台市内3会場どこでも振替OK。「今週は木曜が都合悪い」という場合も、土曜や火・水曜に振り替えてご参加いただけます。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-label">Q</span>展覧会への出品は必須ですか？</div>
+      <div class="faq-a">いいえ、任意です。年1回作品展を開催していますが、出品するかどうかは本人の意思に委ねています。外部の展覧会も希望者には対応します。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-label">Q</span>大人でも初心者から始められますか？</div>
+      <div class="faq-a">はじめて筆を持つ方も歓迎しています。楷書の基本からていねいに指導します。競書・個人練習・展覧会出品と、ご自身の目的に合わせて取り組み方を選べます。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-label">Q</span>月謝はいくらですか？</div>
+      <div class="faq-a">月謝はお子さまと大人で異なり、大人は段級によっても変わります。詳しくは体験の際またはお問い合わせフォームよりご確認ください。</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ========================================
+     作品展
+     ======================================== -->
+<div class="alt-bg">
+<div class="section" style="padding-top:72px;padding-bottom:72px">
+  <div class="sec-label">works</div>
+  <h2 class="sec-title">作品展より</h2>
+
+  <!-- ▼ 作品展の説明文を変更する場合はここ ▼ -->
+  <p style="font-size:14px;color:var(--ink-mid);line-height:2.3;margin-bottom:36px;max-width:500px">
+    毎年開催している絖麗書道会作品展より。同じ字でも、書体やスタイルによってまったく違う表情になります。
+  </p>
+  <!-- ▲ ここまで ▲ -->
+
+  <div class="works-grid">
+    <!-- ▼ 作品展の写真に差し替えてください（<img>タグで置き換えOK） ▼ -->
+    <div class="work-item"><div class="work-placeholder">愛</div></div>
+    <div class="work-item"><div class="work-placeholder">書</div></div>
+    <div class="work-item"><div class="work-placeholder">道</div></div>
+    <div class="work-item"><div class="work-placeholder">心</div></div>
+    <div class="work-item"><div class="work-placeholder">花</div></div>
+    <div class="work-item"><div class="work-placeholder">風</div></div>
+    <div class="work-item"><div class="work-placeholder">雅</div></div>
+    <div class="work-item"><div class="work-placeholder">墨</div></div>
+    <!-- ▲ 写真ここまで ▲ -->
+  </div>
+
+</div>
+</div>
+
+
+<!-- ========================================
+     お問い合わせ・体験申し込み
+     ======================================== -->
+<div style="background:var(--paper-warm);border-top:1px solid var(--border)">
+<div class="section" id="contact" style="padding-top:72px;padding-bottom:72px">
   <div class="sec-label">contact</div>
   <h2 class="sec-title">体験申し込み・お問い合わせ</h2>
-  <p class="sec-desc" style="margin-bottom:36px">体験レッスンは無料・手ぶらでOKです。お気軽にご連絡ください。</p>
+  <p style="font-size:14px;color:var(--ink-mid);line-height:2.3;margin-bottom:36px;max-width:500px">
+    体験レッスンは無料・手ぶらでOKです。お気軽にどうぞ。
+  </p>
   <div class="gform-wrap">
-    <!-- ▼▼▼ Googleフォームのiframeをここに貼り付けてください ▼▼▼ -->
-    <!--
-      手順:
-      1. Googleフォームを開く
-      2. 右上の「送信」ボタンをクリック
-      3. 「<>」（埋め込み）タブを選択
-      4. 表示されたiframeコードをコピーして下のdivと差し替える
+
+    <!-- ▼▼▼ Googleフォームの埋め込みコードをここに貼り付けてください ▼▼▼
+         手順:
+         1. Googleフォームを開く
+         2. 右上の「送信」ボタンをクリック
+         3. 「<>」（埋め込み）タブを選択
+         4. 表示された <iframe ...> コードをコピー
+         5. 下のプレースホルダー（<div class="gform-placeholder">〜</div>）を
+            まるごと削除して、コピーしたiframeコードを貼り付ける
     -->
     <div class="gform-placeholder">
       <p>
         ここにGoogleフォームの埋め込みコードを貼り付けてください。<br><br>
-        Googleフォーム → 送信 → <code>&lt;&gt;</code>（埋め込みタブ）→ コードをコピー<br>
-        上のコメント部分と差し替えてください。
+        Googleフォーム → 送信 → <code>&lt;&gt;</code>（埋め込みタブ）→ コードをコピー
       </p>
     </div>
-    <!-- ▲▲▲ ここまで ▲▲▲ -->
+    <!-- ▲▲▲ フォームここまで ▲▲▲ -->
+
   </div>
 </div>
+</div>
 
+
+<!-- ========================================
+     フッター
+     ======================================== -->
 <footer>
+  <!-- ▼ 教室名・著作権表示を変更する場合はここ ▼ -->
   <span class="footer-logo">絖麗書道会</span>
   <span class="footer-copy">© 2025 絖麗書道会 ／ 日院書道会所属 — 仙台</span>
+  <!-- ▲ ここまで ▲ -->
 </footer>
+
 </body>
 </html>
