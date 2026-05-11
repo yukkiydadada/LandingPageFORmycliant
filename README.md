@@ -1,0 +1,2 @@
+# LandingPageFORmycliant
+お願いされたLPのコードを格納する予定
